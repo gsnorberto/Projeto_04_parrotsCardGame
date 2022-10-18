@@ -3,7 +3,7 @@ let numberOfCards = 0;
 while(true){
     let qnt = prompt('Com quantas cartas quer jogar?');
 
-    if(qnt < 2 || qnt > 14 || qnt % 2 !== 0){
+    if(qnt < 4 || qnt > 14 || qnt % 2 !== 0){
         alert('Insira um valor válido');
     } else{
         numberOfCards = qnt;
