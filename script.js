@@ -1,4 +1,4 @@
-let numberOfCards = 4;
+let numberOfCards = 14;
 let cardsPosition = [];
 let cardsName = ['bobrossparrot.gif', 'explodyparrot.gif', 'fiestaparrot.gif', 'metalparrot.gif', 'revertitparrot.gif', 'tripletsparrot.gif', 'unicornparrot.gif'];
 
@@ -18,6 +18,7 @@ cardsPosition.sort(comparador);
 function comparador() { 
 	return Math.random() - 0.5; 
 }
+console.log(cardsPosition);
 
 // Add cards on display
 for(let i = 0; i < numberOfCards; i++) {
@@ -26,9 +27,9 @@ for(let i = 0; i < numberOfCards; i++) {
 
 //Turn Card
 const turnCard = (divPosition) => {
-    document.querySelector(`.cards .card:nth-child(${divPosition})`).innerHTML = `<img src='./media/imgs/${cardsName[cardsPosition[divPosition-1]]}' alt=''>`;
+    document.querySelector(`.cards .card:nth-child(${divPosition})`).innerHTML = `<img src='./media/imgs/${cardsName[[cardsPosition[divPosition-1]]-1]}' alt=''>`;
 }
 
 
-console.log(cardsPosition);
+
 
