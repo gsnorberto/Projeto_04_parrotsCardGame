@@ -34,6 +34,7 @@ body{
     border-radius: 5px;
     margin: 0 17px;
     margin-bottom: 34px;
+    cursor: pointer;
 }
 
 .card img {
