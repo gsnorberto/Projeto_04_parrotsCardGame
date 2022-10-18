@@ -1,6 +1,18 @@
+let numberOfCards = 0;
+
+while(true){
+    let qnt = prompt('Com quantas cartas quer jogar?');
+
+    if(qnt < 2 || qnt > 14 || qnt % 2 !== 0){
+        alert('Insira um valor válido');
+    } else{
+        numberOfCards = qnt;
+        break;
+    }
+}
+
 let cards_div = document.querySelector('.cards');
 
-let numberOfCards = 10;
 let cardsPosition = []; // exemple with 8 cards = [1,4,1,3,3,4,2,2]
 let cardsName = ['bobrossparrot.gif', 'explodyparrot.gif', 'fiestaparrot.gif', 'metalparrot.gif', 'revertitparrot.gif', 'tripletsparrot.gif', 'unicornparrot.gif'];
 
@@ -61,7 +73,11 @@ const turnCard = (divPosition) => {
         numberOfCardsTurned = 0;
     }
 
-    if(count_rightCards === numberOfCards){
+    console.log(count_rightCards);
+        console.log(numberOfCards);
+
+    if(count_rightCards == numberOfCards){
+        
         setTimeout(function(){
             alert(`Você ganhou em ${numberOfMoves} jogadas!`);
         }, 500);
