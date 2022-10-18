@@ -1,13 +1,14 @@
-let numberOfCards = 8;
+let cards_div = document.querySelector('.cards');
+
+let numberOfCards = 10;
 let cardsPosition = []; // exemple with 8 cards = [1,4,1,3,3,4,2,2]
 let cardsName = ['bobrossparrot.gif', 'explodyparrot.gif', 'fiestaparrot.gif', 'metalparrot.gif', 'revertitparrot.gif', 'tripletsparrot.gif', 'unicornparrot.gif'];
 
 let numberOfCardsTurned = 0; // 0, 1 or 2
 let upturnedCard_position = []; // position - card 1 and card 2 
 
-let cards_div = document.querySelector('.cards');
-
-let count_rightCards = 0; // 
+let count_rightCards = 0; // 2, 4, 6 ... 
+let numberOfMoves = 0; // 1,2,3,4...
 
 // Insert cards to array
 for(let i = 1; i <= (numberOfCards / 2); i++){
@@ -30,14 +31,12 @@ for(let i = 0; i < numberOfCards; i++) {
 
 //Turn Card
 const turnCard = (divPosition) => {
-    // if there are no upturned cards
-    if(numberOfCardsTurned === 0 ) {
+    // if there are no upturned cards or if the clicked cards are different
+    if(numberOfCardsTurned === 0 || upturnedCard_position[0] !== divPosition) {
         numberOfCardsTurned++;
         upturnedCard_position.push(divPosition);
-    } else if(upturnedCard_position[0] !== divPosition) { // if upturned card !== clicked card
-        numberOfCardsTurned++;
-        upturnedCard_position.push(divPosition);
-    }
+        numberOfMoves++;
+    } 
     
     document.querySelector(`.cards .card:nth-child(${divPosition})`).innerHTML = `<img src='./media/imgs/${cardsName[[cardsPosition[divPosition-1]]-1]}' alt=''>`;
 
@@ -48,16 +47,24 @@ const turnCard = (divPosition) => {
             document.querySelector(`.cards .card:nth-child(${upturnedCard_position[1]})`).removeAttribute("onclick");
 
             count_rightCards += 2;
-        } else {
-            document.querySelector(`.cards .card:nth-child(${upturnedCard_position[0]})`).innerHTML = `<img src='./media/imgs/back.png' alt=''>`;
-            document.querySelector(`.cards .card:nth-child(${upturnedCard_position[1]})`).innerHTML = `<img src='./media/imgs/back.png' alt=''>`;
+            upturnedCard_position = [];
+        } else { //the cards are different
+            setTimeout(function(){
+                //hide card
+                document.querySelector(`.cards .card:nth-child(${upturnedCard_position[0]})`).innerHTML = `<img src='./media/imgs/back.png' alt=''>`;
+                document.querySelector(`.cards .card:nth-child(${upturnedCard_position[1]})`).innerHTML = `<img src='./media/imgs/back.png' alt=''>`;
+
+                upturnedCard_position = [];
+            }, 1000);
+            
         }
         numberOfCardsTurned = 0;
-        upturnedCard_position = [];
     }
 
     if(count_rightCards === numberOfCards){
-        alert('Você venceu!!!')
+        setTimeout(function(){
+            alert(`Você ganhou em ${numberOfMoves} jogadas!`);
+        }, 500);
     }
 }
 
