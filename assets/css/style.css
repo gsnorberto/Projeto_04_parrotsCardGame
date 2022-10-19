@@ -14,7 +14,7 @@ body{
     color: #75B79E;
     font-size: 56px;
     font-weight: 700;
-    margin-top: 40px;
+    margin-top: 60px;
     margin-bottom: 50px;
 }
 .cards {
@@ -44,6 +44,21 @@ body{
 .card img {
     width: 100px;
     height: auto;
+}
+
+.clock{
+    position: fixed;
+    bottom: 0%;
+    right: calc(50% - (80px/2));
+    width: 60px;
+    height: 20px;
+    background-color: #4F4F4F;
+    color: #FFFFFF;
+    border-radius: 1px;
+    opacity: 0.8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (max-width: 768px) {
