@@ -98,7 +98,20 @@ const turnCard = (divPosition) => {
 
         setTimeout(function () {
             alert(`Você ganhou em ${numberOfMoves} jogadas! Tempo do jogo: ${timeFormat(m)}:${timeFormat(s-1)}`);
+
+            while (true) {
+                let userResponse = prompt("Deseja jogar novamente? Digite: 'sim' ou 'não'");
             
+                if (userResponse == 'sim') {
+                    document.location.reload(true);
+                    break;
+                } else if(userResponse == 'não'){
+                    break;
+                } else {
+                    alert("Resposta inválida! Digite novamente")
+                }
+            }
+
         }, 500);
     }
 }
