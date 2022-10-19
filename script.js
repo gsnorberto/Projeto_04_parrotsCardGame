@@ -52,7 +52,10 @@ const turnCard = (divPosition) => {
     
     document.querySelector(`.cards .card:nth-child(${divPosition})`).innerHTML = `<img src='./media/imgs/${cardsName[[cardsPosition[divPosition-1]]-1]}' alt=''>`;
 
-    if(numberOfCardsTurned === 2){
+    if(numberOfCardsTurned === 2){12
+        //disable all click events
+        document.querySelectorAll(".card").forEach((element) => element.classList.add("disabled"));
+
         if(cardsPosition[upturnedCard_position[0]-1] === cardsPosition[upturnedCard_position[1]-1]){ //the cards are the same
             //disable click
             document.querySelector(`.cards .card:nth-child(${upturnedCard_position[0]})`).removeAttribute("onclick");
@@ -70,6 +73,11 @@ const turnCard = (divPosition) => {
             }, 1000);
             
         }
+
+        setTimeout(function () {
+            document.querySelectorAll(".card").forEach((element) => element.classList.remove("disabled"));
+        }, 1100);
+
         numberOfCardsTurned = 0;
     }
 

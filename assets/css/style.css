@@ -37,6 +37,10 @@ body{
     cursor: pointer;
 }
 
+.disabled{
+    pointer-events: none;
+}
+
 .card img {
     width: 100px;
     height: auto;
