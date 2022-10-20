@@ -6,7 +6,7 @@ let s = 0;
 let timeout;
 
 while (true) {
-    let qnt = prompt('Com quantas cartas quer jogar?');
+    let qnt = prompt('Com quantas cartas quer jogar?  Digite um número par entre 4 e 14');
 
     if (qnt < 4 || qnt > 14 || qnt % 2 !== 0) {
         alert('Insira um valor válido');
@@ -35,18 +35,24 @@ for (let i = 1; i <= (numberOfCards / 2); i++) {
     }
 }
 
-
-
 // Shuffle cards
 cardsPosition.sort(comparador);
 function comparador() {
     return Math.random() - 0.5;
 }
-console.log(cardsPosition);
 
 // Add cards on display
 for (let i = 0; i < numberOfCards; i++) {
-    cards_div.innerHTML += `<div onclick='turnCard(${i + 1})' class='card'> <img src='./media/imgs/back.png' alt=''> </div>`;
+    cards_div.innerHTML += `
+        <div onclick='turnCard(${i + 1})' class="card">
+            <div class="frontFace-card">
+                <img src="./media/imgs/back.png" alt="">
+            </div>
+            <div class="backFace-card">
+                <img src="./media/imgs/${cardsName[cardsPosition[i]-1]}" alt="">
+            </div>
+        </div>
+    `;
 }
 
 //Turn Card
@@ -58,7 +64,8 @@ const turnCard = (divPosition) => {
         numberOfMoves++;
     }
 
-    document.querySelector(`.cards .card:nth-child(${divPosition})`).innerHTML = `<img src='./media/imgs/${cardsName[[cardsPosition[divPosition - 1]] - 1]}' alt=''>`;
+    document.querySelector(`.cards .card:nth-child(${divPosition}) .frontFace-card`).classList.add('hide-card');
+    document.querySelector(`.cards .card:nth-child(${divPosition}) .backFace-card`).classList.add('show-card');
 
     if (numberOfCardsTurned === 2) {
         12
@@ -75,12 +82,14 @@ const turnCard = (divPosition) => {
         } else { //the cards are different
             setTimeout(function () {
                 //hide card
-                document.querySelector(`.cards .card:nth-child(${upturnedCard_position[0]})`).innerHTML = `<img src='./media/imgs/back.png' alt=''>`;
-                document.querySelector(`.cards .card:nth-child(${upturnedCard_position[1]})`).innerHTML = `<img src='./media/imgs/back.png' alt=''>`;
+                document.querySelector(`.cards .card:nth-child(${upturnedCard_position[0]}) .frontFace-card`).classList.remove('hide-card');
+                document.querySelector(`.cards .card:nth-child(${upturnedCard_position[0]}) .backFace-card`).classList.remove('show-card');
+
+                document.querySelector(`.cards .card:nth-child(${upturnedCard_position[1]}) .frontFace-card`).classList.remove('hide-card');
+                document.querySelector(`.cards .card:nth-child(${upturnedCard_position[1]}) .backFace-card`).classList.remove('show-card');
 
                 upturnedCard_position = [];
             }, 1000);
-
         }
 
         setTimeout(function () {
@@ -89,9 +98,6 @@ const turnCard = (divPosition) => {
 
         numberOfCardsTurned = 0;
     }
-
-    console.log(count_rightCards);
-    console.log(numberOfCards);
 
     if (count_rightCards == numberOfCards) {
         stopTime();
